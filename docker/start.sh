@@ -41,7 +41,6 @@ chmod +x /usr/bin/docker-compose
 
 # Set a few environment variables with default values (the RSA keys that constitutes our SSL certificate) :
 chmod +x ~/.zshrc
-chmod +x ~/.zshenv
 echo "# SSL certificate :" >> ~/.zshrc
 rsaKeysPath=/etc/certificates
 echo "export RSA_KEYS_PATH=$rsaKeysPath" >> ~/.zshrc
