@@ -1,0 +1,26 @@
+version: "3.9"
+
+services:
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: portainer
+    hostname: portainer
+    restart: unless-stopped
+    network_mode: "host"
+    security_opt:
+      - no-new-privileges:true
+    volumes:
+      - type: volume
+        source: "/var/run/docker.sock"
+        target: "/var/run/docker.sock"
+        read_only: true
+        volume:
+          nocopy: true
+      - type: volume
+        source: "portainer_data"
+        target: "/data"
+        read_only: false
+        volume:
+          nocopy: true
+    ports:
+      - "9443:9443"
