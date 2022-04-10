@@ -50,11 +50,6 @@ chmod +x /usr/bin/docker-compose
 
 # Set a few environment variables with default values (the RSA keys that constitutes our SSL certificate) :
 environmentSettings=~/.zshrc
-if [ ! -f "$environmentSettings" ]; then
-  touch $environmentSettings
-else
-  cp $environmentSettings $environmentSettings.backup."$(date +"%Y-%m-%d")"
-fi
 chmod +x $environmentSettings
 echo "# SSL certificate :" >> $environmentSettings
 rsaKeysPath=/etc/certificates
@@ -66,8 +61,10 @@ echo "export PATH=\$PATH:\$RSA_PUBLIC_KEY_FILENAME" >> $environmentSettings
 rsaPrivateKeyFilename=$(ls $rsaKeysPath/*.key)
 echo "export RSA_PRIVATE_KEY_FILENAME=$rsaPrivateKeyFilename" >> $environmentSettings
 echo "export PATH=\$PATH:\$RSA_PRIVATE_KEY_FILENAME" >> $environmentSettings
+
+# Reload the session properties :
 zsh -x $environmentSettings
-# These values may be wrong, please update them if needed (these are the default ones for Truenas SCALE).
+~/.bashrc
 
 # All good!
 exit 0
