@@ -2,41 +2,27 @@
 
 ########################################################################################################################
 
-# [Requirement : Folder that contains the RSA keys]
-rsaKeysPath=$(printenv RSA_KEYS_PATH)
-if [ -z "$rsaKeysPath" ]
-then
-  echo "Please set the environment variable RSA_KEYS_PATH with the path of the folder that contains the RSA keys"
-  exit 1
-fi
-if [ ! -f "$rsaKeysPath" ]; then
-  echo "$rsaKeysPath does not exist. Please set the right folder path to the environment variable RSA_KEYS_PATH"
-  exit 1
-fi
-
 # [Requirement : Public RSA key]
-rsaPublicKeyFilename=$(printenv RSA_PUBLIC_KEY_FILENAME)
-if [ -z "$rsaPublicKeyFilename" ]
+rsaPublicKeyFilepath=$(printenv RSA_PUBLIC_KEY_FILEPATH)
+if [ -z "$rsaPublicKeyFilepath" ]
 then
-  echo "Please set the environment variable RSA_PUBLIC_KEY_FILENAME with the public RSA key filename"
+  echo "Please set the environment variable RSA_PUBLIC_KEY_FILEPATH with the public RSA key filename"
   exit 1
 fi
-rsaPublicKeyFilepath="${rsaKeysPath}${rsaPublicKeyFilename}"
 if [ ! -f "$rsaPublicKeyFilepath" ]; then
-  echo "$rsaPublicKeyFilepath does not exist. Please set the filename path to the environment variable RSA_PUBLIC_KEY_FILENAME"
+  echo "$rsaPublicKeyFilepath does not exist. Please set the filename path to the environment variable RSA_PUBLIC_KEY_FILEPATH"
   exit 1
 fi
 
 # [Requirement : Private RSA key]
-rsaPrivateKeyFilename=$(printenv RSA_PRIVATE_KEY_FILENAME)
-if [ -z "$rsaPrivateKeyFilename" ]
+rsaPrivateKeyFilepath=$(printenv RSA_PRIVATE_KEY_FILEPATH)
+if [ -z "$rsaPrivateKeyFilepath" ]
 then
-  echo "Please set the environment variable RSA_PRIVATE_KEY_FILENAME with the private RSA key filename"
+  echo "Please set the environment variable RSA_PRIVATE_KEY_FILEPATH with the private RSA key filename"
   exit 1
 fi
-rsaPrivateKeyFilepath="${rsaKeysPath}${rsaPrivateKeyFilename}"
 if [ ! -f "$rsaPrivateKeyFilepath" ]; then
-  echo "$rsaPrivateKeyFilepath does not exist. Please set the filename path to the environment variable RSA_PRIVATE_KEY_FILENAME"
+  echo "$rsaPrivateKeyFilepath does not exist. Please set the filename path to the environment variable RSA_PRIVATE_KEY_FILEPATH"
   exit 1
 fi
 

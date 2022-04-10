@@ -43,11 +43,10 @@ chmod +x /usr/bin/docker-compose
 chmod +x ~/.zshrc
 echo "# SSL certificate :" >> ~/.zshrc
 rsaKeysPath=/etc/certificates
-echo "export RSA_KEYS_PATH=$rsaKeysPath" >> ~/.zshrc
 rsaPublicKeyFilename=$(ls $rsaKeysPath/*.crt)
-echo "export RSA_PUBLIC_KEY_FILENAME=$rsaPublicKeyFilename" >> ~/.zshrc
+echo "export RSA_PUBLIC_KEY_FILEPATH=$rsaPublicKeyFilename" >> ~/.zshrc
 rsaPrivateKeyFilename=$(ls $rsaKeysPath/*.key)
-echo "export RSA_PRIVATE_KEY_FILENAME=$rsaPrivateKeyFilename" >> ~/.zshrc
+echo "export RSA_PRIVATE_KEY_FILEPATH=$rsaPrivateKeyFilename" >> ~/.zshrc
 
 # Reload the session properties :
 exec zsh && exec bash
