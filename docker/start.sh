@@ -53,13 +53,13 @@ cp /etc/profile /etc/profile.backup."$(date +"%Y-%m-%d")"
 echo "# SSL Certificate" >> /etc/profile
 rsaKeysPath=/etc/certificates
 echo "export RSA_KEYS_PATH=$rsaKeysPath" >> /etc/profile
-echo "export PATH=$PATH:$RSA_KEYS_PATH" >> /etc/profile
+echo "export PATH=\$PATH:\$RSA_KEYS_PATH" >> /etc/profile
 rsaPublicKeyFilename=$(ls $rsaKeysPath/*.crt)
 echo "export RSA_PUBLIC_KEY_FILENAME=$rsaPublicKeyFilename" >> /etc/profile
-echo "export PATH=$PATH:$RSA_PUBLIC_KEY_FILENAME" >> /etc/profile
+echo "export PATH=\$PATH:\$RSA_PUBLIC_KEY_FILENAME" >> /etc/profile
 rsaPrivateKeyFilename=$(ls $rsaKeysPath/*.key)
 echo "export RSA_PRIVATE_KEY_FILENAME=$rsaPrivateKeyFilename" >> /etc/profile
-echo "export PATH=$PATH:$RSA_PRIVATE_KEY_FILENAME" >> /etc/profile
+echo "export PATH=\$PATH:\$RSA_PRIVATE_KEY_FILENAME" >> /etc/profile
 source /etc/profile
 # These values may be wrong, please update them if needed (these are the default ones for Truenas SCALE).
 
