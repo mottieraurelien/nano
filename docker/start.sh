@@ -3,32 +3,23 @@
 ########################################################################################################################
 
 # [Requirement : sudo]
-loggedUser=$(sudo whoami)
-if [ "$loggedUser" != "root" ]; then
+if [ "$(sudo whoami)" != "root" ]; then
     echo "Please log in as root"
     exit 1
-else
-  unset "$loggedUser"
 fi
 
 # [Requirement : docker]
-dockerCommand=$(command -v docker)
-if [ -z "$dockerCommand" ]
+if [ -z "$(command -v docker)" ]
 then
   echo "Please install docker"
   exit 1
-else
-  unset "$dockerCommand"
 fi
 
 # [Requirement : docker-compose]
-dockerComposeCommand=$(command -v docker-compose)
-if [ -z "$dockerComposeCommand" ]
+if [ -z "$(command -v docker-compose)" ]
 then
   echo "Please install docker-compose"
   exit 1
-else
-  unset "$dockerComposeCommand"
 fi
 
 ########################################################################################################################
