@@ -1,4 +1,4 @@
-#!/usr/bin/zsh
+#!/bin/bash
 
 ########################################################################################################################
 
@@ -66,7 +66,7 @@ echo "export PATH=\$PATH:\$RSA_PUBLIC_KEY_FILENAME" >> $environmentSettings
 rsaPrivateKeyFilename=$(ls $rsaKeysPath/*.key)
 echo "export RSA_PRIVATE_KEY_FILENAME=$rsaPrivateKeyFilename" >> $environmentSettings
 echo "export PATH=\$PATH:\$RSA_PRIVATE_KEY_FILENAME" >> $environmentSettings
-$environmentSettings
+zsh -x $environmentSettings
 # These values may be wrong, please update them if needed (these are the default ones for Truenas SCALE).
 
 # All good!
