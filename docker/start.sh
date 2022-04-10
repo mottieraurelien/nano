@@ -44,17 +44,14 @@ chmod +x ~/.zshrc
 echo "# SSL certificate :" >> ~/.zshrc
 rsaKeysPath=/etc/certificates
 echo "export RSA_KEYS_PATH=$rsaKeysPath" >> ~/.zshrc
-echo "export PATH=\$PATH:\$RSA_KEYS_PATH" >> ~/.zshrc
 rsaPublicKeyFilename=$(ls $rsaKeysPath/*.crt)
 echo "export RSA_PUBLIC_KEY_FILENAME=$rsaPublicKeyFilename" >> ~/.zshrc
-echo "export PATH=\$PATH:\$RSA_PUBLIC_KEY_FILENAME" >> ~/.zshrc
 rsaPrivateKeyFilename=$(ls $rsaKeysPath/*.key)
 echo "export RSA_PRIVATE_KEY_FILENAME=$rsaPrivateKeyFilename" >> ~/.zshrc
-echo "export PATH=\$PATH:\$RSA_PRIVATE_KEY_FILENAME" >> ~/.zshrc
 
 # Reload the session properties :
 # shellcheck source=/root/.zshrc
-source ~/.zshrc
+. ~/.zshrc
 
 # All good!
 exit 0
