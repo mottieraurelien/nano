@@ -49,11 +49,14 @@ systemctl restart docker
 chmod +x /usr/bin/docker-compose
 
 # Set a few environment variables with default values (the RSA keys that constitutes our SSL certificate) :
-export RSA_KEYS_PATH=/etc/certificates
+cp /etc/profile /etc/profile.backup."$(date +"%Y-%m-%d")"
+echo "# SSL Certificate" >> /etc/profile
+echo "export RSA_KEYS_PATH=/etc/certificates" >> /etc/profile
 rsaPublicKeyFilename=$(ls $RSA_KEYS_PATH/*.crt)
-export RSA_PUBLIC_KEY_FILENAME=$rsaPublicKeyFilename
+echo "export RSA_PUBLIC_KEY_FILENAME=$rsaPublicKeyFilename" >> /etc/profile
 rsaPrivateKeyFilename=$(ls $RSA_KEYS_PATH/*.key)
-export RSA_PRIVATE_KEY_FILENAME=$rsaPrivateKeyFilename
+echo "export RSA_PRIVATE_KEY_FILENAME=$rsaPrivateKeyFilename" >> /etc/profile
+source /etc/profile
 # These values may be wrong, please update them if needed (these are the default ones for Truenas SCALE).
 
 # All good!
