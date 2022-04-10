@@ -51,7 +51,7 @@ docker system prune -a --volumes -f
 
 # Run Portainer in a new container (volume will be created automatically) :
 currentDirectory=$(dirname "$0")
-docker-compose -f "$currentDirectory/docker-compose-portainer.yml" up
+docker-compose -f "$currentDirectory/docker-compose-portainer.yml" up -d
 
 # Perform health check to make sure we can access Portainer from the local network :
 http_status=$(curl --max-time 0.5 -s -o /dev/null -I -w "%{http_code}" "http://localhost:9000/")
