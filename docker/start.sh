@@ -50,9 +50,8 @@ echo "export RSA_PUBLIC_KEY_FILENAME=$rsaPublicKeyFilename" >> ~/.zshrc
 rsaPrivateKeyFilename=$(ls $rsaKeysPath/*.key)
 echo "export RSA_PRIVATE_KEY_FILENAME=$rsaPrivateKeyFilename" >> ~/.zshrc
 
-# Reload the environment variables :
-# shellcheck source=/root/.zshenv
-. ~/.zshenv
+# Reload the session properties :
+exec zsh && exec bash
 
 # All good!
 exit 0
