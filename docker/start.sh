@@ -63,8 +63,8 @@ echo "export RSA_PRIVATE_KEY_FILENAME=$rsaPrivateKeyFilename" >> $environmentSet
 echo "export PATH=\$PATH:\$RSA_PRIVATE_KEY_FILENAME" >> $environmentSettings
 
 # Reload the session properties :
-zsh -x $environmentSettings
-~/.bashrc
+# shellcheck source=/root/.zshrc
+source $environmentSettings
 
 # All good!
 exit 0
