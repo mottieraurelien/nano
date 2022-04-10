@@ -9,7 +9,7 @@ then
   echo "Please set the environment variable RSA_KEYS_FILEPATH with the RSA keys filepath"
   exit 1
 fi
-if [ ! -f "$rsaKeysPath" ]; then
+if [ ! -d "$rsaKeysPath" ]; then
   echo "$rsaKeysPath does not exist, please set the path to the environment variable RSA_KEYS_FILEPATH"
   exit 1
 fi
