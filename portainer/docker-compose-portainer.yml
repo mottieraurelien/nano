@@ -10,7 +10,7 @@ services:
     security_opt:
       - no-new-privileges:true
     volumes:
-      - type: volume
+      - type: bind
         source: /var/run/docker.sock
         target: /var/run/docker.sock
         read_only: true
@@ -18,7 +18,9 @@ services:
         source: portainer_data
         target: /data
         read_only: false
-      - type: volume
+        volume:
+          nocopy: true
+      - type: bind
         source: ${RSA_KEYS_FILEPATH}
         target: /certs
         read_only: true
