@@ -40,22 +40,21 @@ systemctl restart docker
 chmod +x /usr/bin/docker-compose
 
 # Set a few environment variables with default values (the RSA keys that constitutes our SSL certificate) :
-environmentSettings=~/.zshrc
-chmod +x $environmentSettings
-echo "# SSL certificate :" >> $environmentSettings
+chmod +x ~/.zshrc
+echo "# SSL certificate :" >> ~/.zshrc
 rsaKeysPath=/etc/certificates
-echo "export RSA_KEYS_PATH=$rsaKeysPath" >> $environmentSettings
-echo "export PATH=\$PATH:\$RSA_KEYS_PATH" >> $environmentSettings
+echo "export RSA_KEYS_PATH=$rsaKeysPath" >> ~/.zshrc
+echo "export PATH=\$PATH:\$RSA_KEYS_PATH" >> ~/.zshrc
 rsaPublicKeyFilename=$(ls $rsaKeysPath/*.crt)
-echo "export RSA_PUBLIC_KEY_FILENAME=$rsaPublicKeyFilename" >> $environmentSettings
-echo "export PATH=\$PATH:\$RSA_PUBLIC_KEY_FILENAME" >> $environmentSettings
+echo "export RSA_PUBLIC_KEY_FILENAME=$rsaPublicKeyFilename" >> ~/.zshrc
+echo "export PATH=\$PATH:\$RSA_PUBLIC_KEY_FILENAME" >> ~/.zshrc
 rsaPrivateKeyFilename=$(ls $rsaKeysPath/*.key)
-echo "export RSA_PRIVATE_KEY_FILENAME=$rsaPrivateKeyFilename" >> $environmentSettings
-echo "export PATH=\$PATH:\$RSA_PRIVATE_KEY_FILENAME" >> $environmentSettings
+echo "export RSA_PRIVATE_KEY_FILENAME=$rsaPrivateKeyFilename" >> ~/.zshrc
+echo "export PATH=\$PATH:\$RSA_PRIVATE_KEY_FILENAME" >> ~/.zshrc
 
 # Reload the session properties :
 # shellcheck source=/root/.zshrc
-source $environmentSettings
+source ~/.zshrc
 
 # All good!
 exit 0
