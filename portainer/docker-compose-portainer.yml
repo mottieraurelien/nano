@@ -10,24 +10,9 @@ services:
     security_opt:
       - no-new-privileges:true
     volumes:
-      - type: volume
-        source: /var/run/docker.sock
-        target: /var/run/docker.sock
-        read_only: true
-        volume:
-          nocopy: true
-      - type: volume
-        source: portainer_data
-        target: /data
-        read_only: false
-        volume:
-          nocopy: true
-      - type: volume
-        source: ${RSA_KEYS_FILEPATH}
-        target: /certs
-        read_only: true
-        volume:
-          nocopy: true
+      - var/run/docker.sock:/var/run/docker.sock:ro
+      - ${RSA_KEYS_FILEPATH}:/certs:ro
+      - portainer_data:/data:rw
     command: --ssl --sslcert=/certs/${RSA_PUBLIC_KEY_FILENAME} --sslkey=/certs/${RSA_PRIVATE_KEY_FILENAME}
     ports:
       - "9443:9443"
