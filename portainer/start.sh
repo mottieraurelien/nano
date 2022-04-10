@@ -2,27 +2,39 @@
 
 ########################################################################################################################
 
-# [Requirement : Public RSA key]
-rsaPublicKeyFilepath=$(printenv RSA_PUBLIC_KEY_FILEPATH)
-if [ -z "$rsaPublicKeyFilepath" ]
+# [Requirement : RSA keys folder]
+rsaKeysPath=$(printenv RSA_KEYS_FILEPATH)
+if [ -z "$rsaKeysPath" ]
 then
-  echo "Please set the environment variable RSA_PUBLIC_KEY_FILEPATH with the public RSA key filename"
+  echo "Please set the environment variable RSA_KEYS_FILEPATH with the RSA keys filepath"
   exit 1
 fi
-if [ ! -f "$rsaPublicKeyFilepath" ]; then
-  echo "$rsaPublicKeyFilepath does not exist. Please set the filename path to the environment variable RSA_PUBLIC_KEY_FILEPATH"
+if [ ! -f "$rsaKeysPath" ]; then
+  echo "$rsaKeysPath does not exist, please set the path to the environment variable RSA_KEYS_FILEPATH"
   exit 1
 fi
 
-# [Requirement : Private RSA key]
-rsaPrivateKeyFilepath=$(printenv RSA_PRIVATE_KEY_FILEPATH)
-if [ -z "$rsaPrivateKeyFilepath" ]
+# [Requirement : Public RSA key filename]
+rsaPublicKeyFilename=$(printenv RSA_PUBLIC_KEY_FILENAME)
+if [ -z "$rsaPublicKeyFilename" ]
 then
-  echo "Please set the environment variable RSA_PRIVATE_KEY_FILEPATH with the private RSA key filename"
+  echo "Please set the environment variable RSA_PUBLIC_KEY_FILENAME with the public RSA key filename"
   exit 1
 fi
-if [ ! -f "$rsaPrivateKeyFilepath" ]; then
-  echo "$rsaPrivateKeyFilepath does not exist. Please set the filename path to the environment variable RSA_PRIVATE_KEY_FILEPATH"
+if [ ! -f "$rsaKeysPath$rsaPublicKeyFilename" ]; then
+  echo "$rsaKeysPath$rsaPublicKeyFilename does not exist, please set the filename to the environment variable RSA_PUBLIC_KEY_FILENAME"
+  exit 1
+fi
+
+# [Requirement : Private RSA key filename]
+rsaPrivateKeyFilename=$(printenv RSA_PRIVATE_KEY_FILENAME)
+if [ -z "$rsaPrivateKeyFilename" ]
+then
+  echo "Please set the environment variable RSA_PRIVATE_KEY_FILENAME with the private RSA key filename"
+  exit 1
+fi
+if [ ! -f "$rsaKeysPath$rsaPrivateKeyFilename" ]; then
+  echo "$rsaKeysPath$rsaPrivateKeyFilename does not exist, please set the filename to the environment variable RSA_PRIVATE_KEY_FILENAME"
   exit 1
 fi
 
@@ -37,13 +49,9 @@ docker container prune -f
 # Clean up a lot of useless stuff related to Docker :
 docker system prune -a --volumes -f
 
-# Defines the RSA keys paths so that Portainer can automatically use them when firing up :
-#     command: --ssl --sslcert=/certs/portainer.crt --sslkey=/certs/portainer.key
-docker secret create portainer.sslcert "$rsaPublicKeyFilepath"
-docker secret create portainer.sslkey "$rsaPrivateKeyFilepath"
-
 # Run Portainer in a new container (volume will be created automatically) :
-docker compose -f ./docker-compose-portainer.yml
+#docker compose -f ./docker-compose-portainer.yml
+cat ./docker-compose-portainer.yml
 
 # Perform health check to make sure we can access Portainer from the local network :
 http_status=$(curl --max-time 0.5 -s -o /dev/null -I -w "%{http_code}" "http://localhost:9000/")
