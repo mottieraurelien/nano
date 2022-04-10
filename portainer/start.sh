@@ -49,6 +49,9 @@ docker container prune -f
 # Clean up a lot of useless stuff related to Docker :
 docker system prune -a --volumes -f
 
+# Create a new volume for Portainer :
+docker volume create portainer_data
+
 # Run Portainer in a new container (volume will be created automatically) :
 currentDirectory=$(dirname "$0")
 docker-compose -f "$currentDirectory/docker-compose-portainer.yml" up -d
