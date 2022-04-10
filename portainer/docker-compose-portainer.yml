@@ -16,3 +16,6 @@ services:
     command: --ssl --sslcert=/certs/${RSA_PUBLIC_KEY_FILENAME} --sslkey=/certs/${RSA_PRIVATE_KEY_FILENAME}
     ports:
       - "9443:9443"
+
+volumes:
+  portainer_data: { }
