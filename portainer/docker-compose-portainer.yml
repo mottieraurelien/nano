@@ -17,7 +17,7 @@ services:
         volume:
           nocopy: true
       - type: volume
-        source: portainer_data
+        source: ./portainer_data
         target: /data
         read_only: false
         volume:
