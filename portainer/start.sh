@@ -55,7 +55,6 @@ docker-compose -f "$currentDirectory/docker-compose-portainer.yml" up -d
 
 # Perform health check to make sure we can access Portainer from the local network :
 http_status=$(curl --max-time 5 -s -o /dev/null -I -w "%{http_code}" "http://localhost:9000/")
-echo "HTTP Status : $http_status"
 if [ "$http_status" != "200" ]; then
     echo "For some reasons, Portainer is not up and accessible. Please verify the container logs by running the command : docker logs portainer"
     exit 1
