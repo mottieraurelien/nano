@@ -21,8 +21,8 @@ then
   echo "Please set the environment variable RSA_PUBLIC_KEY_FILENAME with the public RSA key filename"
   exit 1
 fi
-if [ ! -f "$rsaKeysPath$rsaPublicKeyFilename" ]; then
-  echo "$rsaKeysPath$rsaPublicKeyFilename does not exist, please set the filename to the environment variable RSA_PUBLIC_KEY_FILENAME"
+if [ ! -f "$rsaKeysPath/$rsaPublicKeyFilename" ]; then
+  echo "$rsaKeysPath/$rsaPublicKeyFilename does not exist, please set the filename to the environment variable RSA_PUBLIC_KEY_FILENAME"
   exit 1
 fi
 
@@ -33,8 +33,8 @@ then
   echo "Please set the environment variable RSA_PRIVATE_KEY_FILENAME with the private RSA key filename"
   exit 1
 fi
-if [ ! -f "$rsaKeysPath$rsaPrivateKeyFilename" ]; then
-  echo "$rsaKeysPath$rsaPrivateKeyFilename does not exist, please set the filename to the environment variable RSA_PRIVATE_KEY_FILENAME"
+if [ ! -f "$rsaKeysPath/$rsaPrivateKeyFilename" ]; then
+  echo "$rsaKeysPath/$rsaPrivateKeyFilename does not exist, please set the filename to the environment variable RSA_PRIVATE_KEY_FILENAME"
   exit 1
 fi
 
