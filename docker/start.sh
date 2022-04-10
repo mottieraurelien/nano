@@ -49,18 +49,23 @@ systemctl restart docker
 chmod +x /usr/bin/docker-compose
 
 # Set a few environment variables with default values (the RSA keys that constitutes our SSL certificate) :
-cp /etc/profile /etc/profile.backup."$(date +"%Y-%m-%d")"
-echo "# SSL Certificate" >> /etc/profile
+profile=~/.zprofile
+if [ ! -f "$profile" ]; then
+  touch $profile
+else
+  cp $profile $profile.backup."$(date +"%Y-%m-%d")"
+fi
+echo "# SSL certificate :" >> $profile
 rsaKeysPath=/etc/certificates
-echo "export RSA_KEYS_PATH=$rsaKeysPath" >> /etc/profile
-echo "export PATH=\$PATH:\$RSA_KEYS_PATH" >> /etc/profile
+echo "export RSA_KEYS_PATH=$rsaKeysPath" >> $profile
+echo "export PATH=\$PATH:\$RSA_KEYS_PATH" >> $profile
 rsaPublicKeyFilename=$(ls $rsaKeysPath/*.crt)
-echo "export RSA_PUBLIC_KEY_FILENAME=$rsaPublicKeyFilename" >> /etc/profile
-echo "export PATH=\$PATH:\$RSA_PUBLIC_KEY_FILENAME" >> /etc/profile
+echo "export RSA_PUBLIC_KEY_FILENAME=$rsaPublicKeyFilename" >> $profile
+echo "export PATH=\$PATH:\$RSA_PUBLIC_KEY_FILENAME" >> $profile
 rsaPrivateKeyFilename=$(ls $rsaKeysPath/*.key)
-echo "export RSA_PRIVATE_KEY_FILENAME=$rsaPrivateKeyFilename" >> /etc/profile
-echo "export PATH=\$PATH:\$RSA_PRIVATE_KEY_FILENAME" >> /etc/profile
-source /etc/profile
+echo "export RSA_PRIVATE_KEY_FILENAME=$rsaPrivateKeyFilename" >> $profile
+echo "export PATH=\$PATH:\$RSA_PRIVATE_KEY_FILENAME" >> $profile
+$profile
 # These values may be wrong, please update them if needed (these are the default ones for Truenas SCALE).
 
 # All good!
