@@ -34,7 +34,7 @@ fi
 ########################################################################################################################
 
 # Backup the default docker service configuration :
-cp /etc/docker/daemon.json /etc/docker/daemon.json.backup."${(date + "%Y-%m-%d")}"
+cp /etc/docker/daemon.json /etc/docker/daemon.json.backup."$(date +"%Y-%m-%d")"
 
 # Update the docker service configuration /etc/docker/daemon.json :
 echo "{\"data-root\": \"/mnt/SSD/ix-applications/docker\", \"exec-opts\": [\"native.cgroupdriver=cgroupfs\"]}" > /etc/docker/daemon.json
