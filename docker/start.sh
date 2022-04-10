@@ -22,6 +22,9 @@ then
   exit 1
 fi
 
+# [Requirement : unique SSL certificate]
+# TODO : make sure there is only one file *.crt et only one file *.key in /etc/certificates (the one used by Truenas)
+
 ########################################################################################################################
 
 # Backup the default docker service configuration :
