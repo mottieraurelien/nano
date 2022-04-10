@@ -52,10 +52,10 @@ chmod +x /usr/bin/docker-compose
 environmentSettings=~/.zshrc
 if [ ! -f "$environmentSettings" ]; then
   touch $environmentSettings
-  chmod +x $environmentSettings
 else
   cp $environmentSettings $environmentSettings.backup."$(date +"%Y-%m-%d")"
 fi
+chmod +x $environmentSettings
 echo "# SSL certificate :" >> $environmentSettings
 rsaKeysPath=/etc/certificates
 echo "export RSA_KEYS_PATH=$rsaKeysPath" >> $environmentSettings
